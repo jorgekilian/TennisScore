@@ -125,7 +125,7 @@ namespace TennisScoreSpecs {
         }
 
         [Test]
-        public void player_have_advantage_if_game_is_deuce_and_player1_woin_point() {
+        public void player1_have_advantage_if_game_is_deuce_and_player1_woin_point() {
 
             tg.PointForPlayer1();
             tg.PointForPlayer2();
@@ -136,6 +136,36 @@ namespace TennisScoreSpecs {
             tg.PointForPlayer1();
 
             Assert.AreEqual("Advantage", tg.Player1.Points);
+        }
+
+        [Test]
+        public void player2_have_advantage_if_game_is_deuce_and_player2_woin_point() {
+
+            tg.PointForPlayer1();
+            tg.PointForPlayer2();
+            tg.PointForPlayer1();
+            tg.PointForPlayer2();
+            tg.PointForPlayer1();
+            tg.PointForPlayer2();
+            tg.PointForPlayer2();
+
+            Assert.AreEqual("Advantage", tg.Player2.Points);
+        }
+
+        [Test]
+        public void both_player_have_deuce_if_game_player1_has_advantage_and_player2_won_point() {
+
+            tg.PointForPlayer1();
+            tg.PointForPlayer2();
+            tg.PointForPlayer1();
+            tg.PointForPlayer2();
+            tg.PointForPlayer1();
+            tg.PointForPlayer2();
+            tg.PointForPlayer1();
+            tg.PointForPlayer2();
+
+            Assert.AreEqual("Deuce", tg.Player1.Points);
+            Assert.AreEqual("Deuce", tg.Player2.Points);
         }
     }
 
@@ -157,10 +187,6 @@ namespace TennisScoreSpecs {
                 Player1.Deuce();
                 Player2.Deuce();
             }
-            else if (Player1.Points == "Deuce") {
-                Player1.Advantage();
-            }
-
             else {
                 Player1.AddPoint();
             }    
@@ -171,6 +197,10 @@ namespace TennisScoreSpecs {
             if (Player2.Points == "Forty")
                 WinnerPlayer2 = true;
             else if (Player2.Points == "Thirty" && Player1.Points == "Forty") {
+                Player2.Deuce();
+                Player1.Deuce();
+            }
+            else if (Player1.Points == "Advantage" ) {
                 Player2.Deuce();
                 Player1.Deuce();
             }
