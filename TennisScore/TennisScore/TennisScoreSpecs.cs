@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Threading.Tasks.Dataflow;
 using NUnit.Framework;
 
@@ -124,11 +125,11 @@ namespace TennisScoreSpecs {
             var tg = new TennisGame();
             tg.Start();
             tg.PointForPlayer1();
-            tg.PointForPlayer1();
-            tg.PointForPlayer2();
-            tg.PointForPlayer2();
             tg.PointForPlayer2();
             tg.PointForPlayer1();
+            tg.PointForPlayer2();
+            tg.PointForPlayer1();
+            tg.PointForPlayer2();
 
             Assert.AreEqual("Deuce", tg.Player1.Points);
             Assert.AreEqual("Deuce", tg.Player2.Points);
@@ -140,14 +141,30 @@ namespace TennisScoreSpecs {
             var tg = new TennisGame();
             tg.Start();
             tg.PointForPlayer2();
-            tg.PointForPlayer2();
-            tg.PointForPlayer1();
-            tg.PointForPlayer1();
             tg.PointForPlayer1();
             tg.PointForPlayer2();
+            tg.PointForPlayer1();
+            tg.PointForPlayer2();
+            tg.PointForPlayer1();
 
             Assert.AreEqual("Deuce", tg.Player1.Points);
             Assert.AreEqual("Deuce", tg.Player2.Points);
+        }
+
+        [Test]
+        public void player_have_advantage_if_game_is_deuce_and_player1_woin_point() {
+
+            var tg = new TennisGame();
+            tg.Start();
+            tg.PointForPlayer1();
+            tg.PointForPlayer2();
+            tg.PointForPlayer1();
+            tg.PointForPlayer2();
+            tg.PointForPlayer1();
+            tg.PointForPlayer2();
+            tg.PointForPlayer1();
+
+            Assert.AreEqual("Advantage", tg.Player1.Points);
         }
     }
 
@@ -169,6 +186,10 @@ namespace TennisScoreSpecs {
                 Player1.Deuce();
                 Player2.Deuce();
             }
+            else if (Player1.Points == "Deuce") {
+                Player1.Advantage();
+            }
+
             else {
                 Player1.AddPoint();
             }    
@@ -188,7 +209,7 @@ namespace TennisScoreSpecs {
     }
 
     public class Player {
-        private readonly List<string> scores = new List<string> { "Love", "Fifteen", "Thirty", "Forty", "Deuce" };
+        private readonly List<string> scores = new List<string> { "Love", "Fifteen", "Thirty", "Forty", "Deuce", "Advantage" };
         private int currentScore;
 
         public string Points => scores[currentScore];
@@ -203,6 +224,10 @@ namespace TennisScoreSpecs {
 
         public void Deuce() {
             currentScore = 4;
+        }
+
+        public void Advantage() {
+            currentScore = 5;
         }
     }
 }
