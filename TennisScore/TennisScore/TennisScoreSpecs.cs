@@ -117,6 +117,22 @@ namespace TennisScoreSpecs {
 
             Assert.AreEqual(true, tg.WinnerPlayer2);
         }
+
+        [Test]
+        public void both_player_have_deuce_if_player1_has_30_points_player2_has_40_points_and_player1_won_point() {
+
+            var tg = new TennisGame();
+            tg.Start();
+            tg.PointForPlayer1();
+            tg.PointForPlayer1();
+            tg.PointForPlayer2();
+            tg.PointForPlayer2();
+            tg.PointForPlayer2();
+            tg.PointForPlayer1();
+
+            Assert.AreEqual("Deuce", tg.Player1.Points);
+            Assert.AreEqual("Deuce", tg.Player2.Points);
+        }
     }
 
     public class TennisGame {
@@ -133,8 +149,14 @@ namespace TennisScoreSpecs {
         public void PointForPlayer1() {
             if (Player1.Points == "Forty")
                 WinnerPlayer1 = true;
-            else
+            else if (Player1.Points == "Thirty" && Player2.Points == "Forty") {
+                Player1.Deuce();
+                Player2.Deuce();
+            }
+            else {
                 Player1.AddPoint();
+            }    
+                
         }
 
         public void PointForPlayer2() {
@@ -146,7 +168,7 @@ namespace TennisScoreSpecs {
     }
 
     public class Player {
-        private readonly List<string> scores = new List<string> { "Love", "Fifteen", "Thirty", "Forty" };
+        private readonly List<string> scores = new List<string> { "Love", "Fifteen", "Thirty", "Forty", "Deuce" };
         private int currentScore;
 
         public string Points => scores[currentScore];
@@ -157,6 +179,10 @@ namespace TennisScoreSpecs {
 
         public void AddPoint() {
             currentScore++;
+        }
+
+        public void Deuce() {
+            currentScore = 4;
         }
     }
 }
