@@ -57,6 +57,16 @@ namespace TennisScoreSpecs {
             Assert.AreEqual("Thirty", tg.Player1.Points);
         }
 
+        [Test]
+        public void player_two_has_30_points_when_won_two_points() {
+
+            var tg = new TennisGame();
+            tg.Start();
+            tg.PointForPlayer2();
+            tg.PointForPlayer2();
+
+            Assert.AreEqual("Thirty", tg.Player2.Points);
+        }
     }
 
     public class TennisGame {
