@@ -13,7 +13,7 @@ namespace TennisScoreSpecs {
             var tg = new TennisGame();
             tg.Start();
 
-            Assert.AreEqual("Love", tg.player1.Points);
+            Assert.AreEqual("Love", tg.Player1.Points);
         }
 
         [Test]
@@ -22,25 +22,43 @@ namespace TennisScoreSpecs {
             var tg = new TennisGame();
             tg.Start();
 
-            Assert.AreEqual("Love", tg.player2.Points);
+            Assert.AreEqual("Love", tg.Player2.Points);
+        }
+
+        [Test]
+        public void player_one_has_15_points_when_won_one_point() {
+
+            var tg = new TennisGame();
+            tg.Start();
+            tg.PointForPlayer1();
+
+            Assert.AreEqual("Fifteen", tg.Player1.Points);
         }
     }
 
     public class TennisGame {
-        public Player player2 { get; set; }
-        public Player player1 { get; set; }
+        public Player Player2 { get; set; }
+        public Player Player1 { get; set; }
 
         public void Start() {
-            player1 = new Player();
-            player2 = new Player();
+            Player1 = new Player();
+            Player2 = new Player();
+        }
+
+        public void PointForPlayer1() {
+            Player1.AddPoint();
         }
     }
 
     public class Player {
+        public string Points { get; private set; }
 
         public Player() {
             Points = "Love";
         }
-        public string Points { get; }
+
+        public void AddPoint() {
+            Points = "Fifteen";
+        }
     }
 }
