@@ -15,7 +15,7 @@ namespace TennisScoreSpecs {
 
         [Test]
         public void both_player_has_0_points_when_tennis_game_start() {
-            
+
             Assert.AreEqual("Love", tg.Player1.Points);
             Assert.AreEqual("Love", tg.Player2.Points);
         }
@@ -229,28 +229,20 @@ namespace TennisScoreSpecs {
         public void PointForPlayer1() {
             if (Player1.Points == "Forty" || Player1.Points == "Advantage")
                 WinnerPlayer1 = true;
-            else if (Player1.Points == "Thirty" && Player2.Points == "Forty") {
+            else if (Player1.Points == "Thirty" && Player2.Points == "Forty" || (Player2.Points == "Advantage")) {
                 Player1.Deuce();
                 Player2.Deuce();
-            }
-            else if (Player2.Points == "Advantage") {
-                Player2.Deuce();
-                Player1.Deuce();
             }
             else {
                 Player1.AddPoint();
-            }    
-                
+            }
+
         }
 
         public void PointForPlayer2() {
             if (Player2.Points == "Forty" || Player2.Points == "Advantage")
                 WinnerPlayer2 = true;
-            else if (Player2.Points == "Thirty" && Player1.Points == "Forty") {
-                Player2.Deuce();
-                Player1.Deuce();
-            }
-            else if (Player1.Points == "Advantage" ) {
+            else if (Player2.Points == "Thirty" && Player1.Points == "Forty" || (Player1.Points == "Advantage")) {
                 Player2.Deuce();
                 Player1.Deuce();
             }
