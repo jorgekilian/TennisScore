@@ -67,6 +67,18 @@ namespace TennisScoreSpecs {
 
             Assert.AreEqual("Thirty", tg.Player2.Points);
         }
+
+        [Test]
+        public void player_one_has_40_points_when_won_three_points() {
+
+            var tg = new TennisGame();
+            tg.Start();
+            tg.PointForPlayer1();
+            tg.PointForPlayer1();
+            tg.PointForPlayer1();
+
+            Assert.AreEqual("Forty", tg.Player1.Points);
+        }
     }
 
     public class TennisGame {
@@ -88,7 +100,7 @@ namespace TennisScoreSpecs {
     }
 
     public class Player {
-        private readonly List<string> scores = new List<string> { "Love", "Fifteen", "Thirty" };
+        private readonly List<string> scores = new List<string> { "Love", "Fifteen", "Thirty", "Forty" };
         private int currentScore;
 
         public string Points => scores[currentScore];
