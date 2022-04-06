@@ -276,8 +276,6 @@ namespace TennisScoreSpecs {
         public void Deuce() {
             currentScore = 4;
         }
-        public void Advantage() {
-            currentScore = 5;
-        }
+
     }
 }
