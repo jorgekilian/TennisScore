@@ -5,33 +5,24 @@ using NUnit.Framework;
 
 namespace TennisScoreSpecs {
     public class Tests {
+
+        TennisGame tg = new TennisGame();
+
         [SetUp]
         public void Setup() {
+            tg.Start();
         }
 
         [Test]
-        public void player_one_has_0_points_when_tennis_game_start() {
-
-            var tg = new TennisGame();
-            tg.Start();
-
+        public void both_player_has_0_points_when_tennis_game_start() {
+            
             Assert.AreEqual("Love", tg.Player1.Points);
-        }
-
-        [Test]
-        public void player_two_has_0_points_when_tennis_game_start() {
-
-            var tg = new TennisGame();
-            tg.Start();
-
             Assert.AreEqual("Love", tg.Player2.Points);
         }
 
         [Test]
         public void player_one_has_15_points_when_won_one_point() {
 
-            var tg = new TennisGame();
-            tg.Start();
             tg.PointForPlayer1();
 
             Assert.AreEqual("Fifteen", tg.Player1.Points);
@@ -40,8 +31,6 @@ namespace TennisScoreSpecs {
         [Test]
         public void player_two_has_15_points_when_won_one_point() {
 
-            var tg = new TennisGame();
-            tg.Start();
             tg.PointForPlayer2();
 
             Assert.AreEqual("Fifteen", tg.Player2.Points);
@@ -50,8 +39,6 @@ namespace TennisScoreSpecs {
         [Test]
         public void player_one_has_30_points_when_won_two_points() {
 
-            var tg = new TennisGame();
-            tg.Start();
             tg.PointForPlayer1();
             tg.PointForPlayer1();
 
@@ -61,8 +48,6 @@ namespace TennisScoreSpecs {
         [Test]
         public void player_two_has_30_points_when_won_two_points() {
 
-            var tg = new TennisGame();
-            tg.Start();
             tg.PointForPlayer2();
             tg.PointForPlayer2();
 
@@ -72,8 +57,6 @@ namespace TennisScoreSpecs {
         [Test]
         public void player_one_has_40_points_when_won_three_points() {
 
-            var tg = new TennisGame();
-            tg.Start();
             tg.PointForPlayer1();
             tg.PointForPlayer1();
             tg.PointForPlayer1();
@@ -84,8 +67,6 @@ namespace TennisScoreSpecs {
         [Test]
         public void player_two_has_40_points_when_won_three_points() {
 
-            var tg = new TennisGame();
-            tg.Start();
             tg.PointForPlayer2();
             tg.PointForPlayer2();
             tg.PointForPlayer2();
@@ -96,8 +77,6 @@ namespace TennisScoreSpecs {
         [Test]
         public void player_one_is_winner_when_won_four_points() {
 
-            var tg = new TennisGame();
-            tg.Start();
             tg.PointForPlayer1();
             tg.PointForPlayer1();
             tg.PointForPlayer1();
@@ -109,8 +88,6 @@ namespace TennisScoreSpecs {
         [Test]
         public void player_two_is_winner_when_won_four_points() {
 
-            var tg = new TennisGame();
-            tg.Start();
             tg.PointForPlayer2();
             tg.PointForPlayer2();
             tg.PointForPlayer2();
@@ -122,8 +99,6 @@ namespace TennisScoreSpecs {
         [Test]
         public void both_player_have_deuce_if_player1_has_30_points_player2_has_40_points_and_player1_won_point() {
 
-            var tg = new TennisGame();
-            tg.Start();
             tg.PointForPlayer1();
             tg.PointForPlayer2();
             tg.PointForPlayer1();
@@ -138,8 +113,6 @@ namespace TennisScoreSpecs {
         [Test]
         public void both_player_have_deuce_if_player2_has_30_points_player1_has_40_points_and_player2_won_point() {
 
-            var tg = new TennisGame();
-            tg.Start();
             tg.PointForPlayer2();
             tg.PointForPlayer1();
             tg.PointForPlayer2();
@@ -154,8 +127,6 @@ namespace TennisScoreSpecs {
         [Test]
         public void player_have_advantage_if_game_is_deuce_and_player1_woin_point() {
 
-            var tg = new TennisGame();
-            tg.Start();
             tg.PointForPlayer1();
             tg.PointForPlayer2();
             tg.PointForPlayer1();
