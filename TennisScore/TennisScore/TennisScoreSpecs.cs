@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks.Dataflow;
 using NUnit.Framework;
 
@@ -44,11 +45,23 @@ namespace TennisScoreSpecs {
 
             Assert.AreEqual("Fifteen", tg.Player2.Points);
         }
+
+        [Test]
+        public void player_one_has_30_points_when_won_two_points() {
+
+            var tg = new TennisGame();
+            tg.Start();
+            tg.PointForPlayer1();
+            tg.PointForPlayer1();
+
+            Assert.AreEqual("Thirty", tg.Player1.Points);
+        }
+
     }
 
     public class TennisGame {
-        public Player Player2 { get; set; }
-        public Player Player1 { get; set; }
+        public Player Player2 { get; private set; }
+        public Player Player1 { get; private set; }
 
         public void Start() {
             Player1 = new Player();
@@ -65,14 +78,17 @@ namespace TennisScoreSpecs {
     }
 
     public class Player {
-        public string Points { get; private set; }
+        private readonly List<string> scores = new List<string> { "Love", "Fifteen", "Thirty" };
+        private int currentScore;
+
+        public string Points => scores[currentScore];
 
         public Player() {
-            Points = "Love";
+            currentScore = 0;
         }
 
         public void AddPoint() {
-            Points = "Fifteen";
+            currentScore++;
         }
     }
 }
