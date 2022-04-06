@@ -91,11 +91,26 @@ namespace TennisScoreSpecs {
 
             Assert.AreEqual("Forty", tg.Player2.Points);
         }
+
+        [Test]
+        public void player_one_is_winner_when_won_four_points() {
+
+            var tg = new TennisGame();
+            tg.Start();
+            tg.PointForPlayer1();
+            tg.PointForPlayer1();
+            tg.PointForPlayer1();
+            tg.PointForPlayer1();
+
+            Assert.AreEqual(true, tg.WinnerPlayer1);
+        }
+
     }
 
     public class TennisGame {
         public Player Player2 { get; private set; }
         public Player Player1 { get; private set; }
+        public bool WinnerPlayer1 { get; set; }
 
         public void Start() {
             Player1 = new Player();
@@ -103,7 +118,10 @@ namespace TennisScoreSpecs {
         }
 
         public void PointForPlayer1() {
-            Player1.AddPoint();
+            if (Player1.Points == "Forty")
+                WinnerPlayer1 = true;
+            else
+                Player1.AddPoint();
         }
 
         public void PointForPlayer2() {
